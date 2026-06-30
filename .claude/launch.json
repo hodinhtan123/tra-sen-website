@@ -1,10 +1,10 @@
-﻿{
+{
   "version": "0.0.1",
   "configurations": [
     {
       "name": "tra-sen",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["-y", "serve", ".", "-l", "3000"],
+      "runtimeArgs": ["-y", "serve", ".", "-l", "3000", "--no-clipboard"],
       "port": 3000
     }
   ]
