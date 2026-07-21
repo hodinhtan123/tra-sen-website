@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.jpg" type="image/jpeg">
+  <title>Trà Sen – Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Baloo 2', sans-serif; background: #FAF6F0; color: #111; }
+
+    /* HEADER */
+    .hdr {
+      background: #111111;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+      position: sticky; top: 0; z-index: 20;
+    }
+    .hdr-nav { display: flex; gap: 28px; }
+    .hdr-nav a {
+      color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.8px; text-transform: uppercase; text-decoration: none; font-size: 15px;
+    }
+    .hdr-nav a:hover, .hdr-nav a.on { color: #fff; }
+    .logo-oval {
+      background: #fff; border-radius: 50%;
+      width: 90px; height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute; left: 50%; transform: translateX(-50%); top: 10px; flex-shrink: 0;
+      overflow: hidden;
+    }
+    .logo-svg { width: 68px; height: 68px; }
+    .hdr-icon { color: rgba(255,255,255,0.7); font-size: 20px; cursor: pointer; }
+    .hdr-icon:hover { color: #fff; }
+
+    /* HERO BANNER */
+    .page-hero {
+      background: #111 url('kkkkk.png') center/cover no-repeat;
+      padding: 90px 80px 80px;
+      text-align: left;
+      position: relative;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(0,0,0,0.55); z-index: 0;
+    }
+    .page-hero > * { position: relative; z-index: 1; }
+    .page-hero-tag {
+      font-size: 13px; font-weight: 700; color: #C8A870;
+      text-transform: uppercase; letter-spacing: 4px; margin-bottom: 16px;
+    }
+    .page-hero h1 {
+      font-size: 64px; font-weight: 800; color: #fff;
+      text-transform: uppercase; line-height: 1;
+    }
+    .page-hero h1 span { color: #C8A870; }
+    .page-hero-sub {
+      margin-top: 20px; font-size: 16px; color: rgba(255,255,255,0.5);
+      font-style: italic; letter-spacing: 0.5px; max-width: 560px;
+    }
+
+    /* SECTION */
+    .section { padding: 60px 80px 90px; }
+    .sec-label { font-size: 12px; font-weight: 700; color: #C8A870; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+    .sec-label::before { content: "✦  "; }
+    .sec-title { font-size: 34px; font-weight: 800; color: #111; margin-bottom: 36px; }
+
+    /* NEWS / BLOG GRID */
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .news-card {
+      background: #fff; border-radius: 6px; overflow: hidden;
+      border: 1px solid #e8e0d8; transition: transform 0.15s, box-shadow 0.15s;
+      display: flex; flex-direction: column; text-decoration: none; color: inherit;
+    }
+    .news-card.live:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
+    .news-card.soon { opacity: 0.6; cursor: default; }
+    .news-img {
+      height: 170px; background: linear-gradient(135deg, #EDE0D0, #f5ead9);
+      display: flex; align-items: center; justify-content: center; font-size: 56px;
+    }
+    .news-body { padding: 20px 22px 24px; flex: 1; display: flex; flex-direction: column; }
+    .news-tag {
+      display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 2px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;
+      width: fit-content;
+    }
+    .news-card.live .news-tag { background: #111; color: #fff; }
+    .news-card.soon .news-tag { background: #e8e0d8; color: #888; }
+    .news-title { font-size: 17px; font-weight: 700; color: #111; margin-bottom: 10px; line-height: 1.4; }
+    .news-excerpt { font-size: 13px; color: #777; line-height: 1.6; flex: 1; }
+    .news-read { font-size: 13px; font-weight: 700; color: #C8A870; margin-top: 16px; }
+
+    /* FOOTER */
+    .footer { background: #0d0d0d; color: #fff; padding: 40px 60px 0; }
+    .footer-top { display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 28px; margin-bottom: 28px; text-align: center; }
+    .footer-logo { font-size: 44px; font-weight: 800; font-style: italic; margin-bottom: 10px; color: #C8A870; }
+    .footer-desc { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 420px; line-height: 1.7; margin-bottom: 16px; }
+    .footer-contacts { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; font-size: 15px; color: rgba(255,255,255,0.7); }
+    .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding-bottom: 32px; }
+    .fl-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; color: #C8A870; }
+    .fl-col a { display: block; font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 10px; text-decoration: none; }
+    .fl-col a:hover { color: #fff; }
+    .footer-bottom { background: #080808; text-align: center; font-size: 13px; padding: 12px; color: rgba(255,255,255,0.4); margin: 0 -60px; }
+
+    .social-float { position: fixed; right: 16px; bottom: 120px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+    .social-float a { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.25); transition: transform 0.2s; }
+    .social-float a:hover { transform: scale(1.15); }
+    .sf-fb { background: #1877F2; }
+    .sf-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+    .sf-tt { background: #000; }
+    .social-float svg { width: 22px; height: 22px; fill: #fff; }
+
+    /* MOBILE NAV */
+    .nav-toggle { display: none; }
+    .nav-burger { display: none; color: rgba(255,255,255,0.9); font-size: 24px; cursor: pointer; line-height: 1; user-select: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .hdr { padding: 0 20px; }
+      .nav-burger { display: block; }
+      .hdr-nav {
+        position: absolute; top: 60px; left: 0; right: 0;
+        background: #111; flex-direction: column; gap: 0;
+        max-height: 0; overflow: hidden; transition: max-height 0.25s ease;
+      }
+      .hdr-nav a { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+      .nav-toggle:checked ~ .hdr-nav { max-height: 400px; }
+      .logo-oval { width: 60px; height: 60px; top: 6px; }
+      .logo-svg { width: 46px; height: 46px; }
+
+      .page-hero { padding: 50px 20px 40px; }
+      .page-hero h1 { font-size: 32px; }
+
+      .section { padding: 40px 20px 60px; }
+      .sec-title { font-size: 26px; }
+      .news-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      .footer { padding: 32px 24px 0; }
+      .footer-links { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { margin: 0 -24px; }
+      .social-float { right: 10px; bottom: 90px; }
+      .social-float a { width: 38px; height: 38px; }
+    }
+    @media (max-width: 420px) {
+      .footer-links { grid-template-columns: 1fr; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="nav-burger">☰</label>
+  <nav class="hdr-nav">
+    <a href="index.html">Trang chủ</a>
+    <a href="ve-chung-toi.html">Về chúng tôi</a>
+    <a href="san-pham.html">Sản phẩm</a>
+    <a href="cua-hang.html">Cửa hàng</a>
+    <a href="blog.html" class="on">Blog</a>
+  </nav>
+  <div class="logo-oval">
+    <svg class="logo-svg" viewBox="0 0 220 300" xmlns="http://www.w3.org/2000/svg">
+      <text x="30" y="62" font-family="Georgia,serif" font-size="26" font-style="italic" fill="#111" text-anchor="middle">T</text>
+      <text x="30" y="112" font-family="Georgia,serif" font-size="26" font-style="italic" fill="#111" text-anchor="middle">R</text>
+      <text x="30" y="160" font-family="Georgia,serif" font-size="26" font-style="italic" fill="#111" text-anchor="middle">Ā</text>
+      <rect x="62" y="22" width="146" height="262" fill="#111" rx="2"/>
+      <text x="135" y="122" font-family="Arial Black,Impact,sans-serif" font-size="86" fill="#fff" text-anchor="middle" font-weight="900">S</text>
+      <text x="135" y="210" font-family="Arial Black,Impact,sans-serif" font-size="86" fill="#fff" text-anchor="middle" font-weight="900">E</text>
+      <text x="135" y="272" font-family="Arial Black,Impact,sans-serif" font-size="86" fill="#fff" text-anchor="middle" font-weight="900">N</text>
+    </svg>
+  </div>
+  <div class="hdr-icon">🔍</div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-tag">✦ Góc chia sẻ</div>
+  <h1>Blog <span>Trà Sen</span></h1>
+  <div class="page-hero-sub">Chuyện nghề, chuyện trà và những gợi ý đồ uống dành cho bạn</div>
+</div>
+
+<!-- BLOG GRID -->
+<section class="section">
+  <div class="sec-label">Bài viết</div>
+  <div class="sec-title">Tất cả bài viết</div>
+
+  <div class="news-grid">
+    <a href="tra-sen-la-gi.html" class="news-card live">
+      <div class="news-img">🌸</div>
+      <div class="news-body">
+        <span class="news-tag">Thương hiệu</span>
+        <div class="news-title">Trà Sen là gì? Khám phá thương hiệu trà trái cây tại Biên Hòa</div>
+        <div class="news-excerpt">Tìm hiểu Trà Sen là ai, vì sao thương hiệu này lại được giới trẻ Biên Hòa yêu thích đến vậy.</div>
+        <div class="news-read">Đọc bài viết →</div>
+      </div>
+    </a>
+
+    <div class="news-card soon">
+      <div class="news-img">📖</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Câu chuyện thương hiệu Trà Sen – Hành trình mang trà trái cây đến giới trẻ</div>
+        <div class="news-excerpt">Hành trình từ những ngày đầu đến khi trở thành điểm hẹn quen thuộc của giới trẻ.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">🏆</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Top 10 món trà trái cây bán chạy nhất tại Trà Sen</div>
+        <div class="news-excerpt">Điểm danh những món đồ uống được gọi nhiều nhất tại quán.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">🍑</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Vì sao giới trẻ Biên Hòa thích trà trái cây hơn trà sữa?</div>
+        <div class="news-excerpt">Xu hướng chuyển dịch khẩu vị của giới trẻ và lý do đằng sau.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">🍊</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Trà đào cam sả có gì đặc biệt? Bí quyết tạo nên hương vị hấp dẫn</div>
+        <div class="news-excerpt">Giải mã công thức đứng sau món trà được yêu thích bậc nhất.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">🍓</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Bí quyết chọn trà trái cây tươi ngon mỗi ngày</div>
+        <div class="news-excerpt">Những mẹo nhỏ giúp bạn chọn được ly trà trái cây chất lượng.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">💚</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Uống trà trái cây có tốt không? Những lợi ích bạn nên biết</div>
+        <div class="news-excerpt">Góc nhìn dinh dưỡng về thói quen uống trà trái cây mỗi ngày.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">📍</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Quán trà trái cây đẹp tại Tân Mai, Biên Hòa dành cho giới trẻ</div>
+        <div class="news-excerpt">Gợi ý không gian sống ảo, check-in dành cho hội bạn thân.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">📋</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Menu Trà Sen có gì? Gợi ý đồ uống nhất định phải thử</div>
+        <div class="news-excerpt">Điểm qua toàn bộ menu và những món không thể bỏ lỡ.</div>
+      </div>
+    </div>
+
+    <div class="news-card soon">
+      <div class="news-img">⭐</div>
+      <div class="news-body">
+        <span class="news-tag">Sắp ra mắt</span>
+        <div class="news-title">Review Trà Sen Biên Hòa – Điểm hẹn quen thuộc của học sinh, sinh viên</div>
+        <div class="news-excerpt">Trải nghiệm thực tế từ những khách hàng thân thiết của quán.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logo">TRÀ SEN</div>
+    <div class="footer-desc">Thương hiệu trà sen thuần Việt — hương vị tinh tế từ đầm sen Tây Hồ. Nguyên liệu tự nhiên, thủ công truyền thống.</div>
+    <div class="footer-contacts">
+      <span>📞 0912 345 678</span>
+      <span>🌐 trasen.vn</span>
+      <span>✉️ hello@trasen.vn</span>
+    </div>
+  </div>
+  <div class="footer-links">
+    <div class="fl-col"><div class="fl-title">Về chúng tôi</div><a href="ve-chung-toi.html">Giới thiệu</a><a href="cua-hang.html">Hệ thống cửa hàng</a><a href="#">Nhượng quyền</a><a href="#">Tuyển dụng</a></div>
+    <div class="fl-col"><div class="fl-title">Sản phẩm</div><a href="san-pham.html">Series Trà Sen</a><a href="san-pham.html">Series Trà Sữa</a><a href="san-pham.html">Series Matcha</a><a href="san-pham.html">Topping</a></div>
+    <div class="fl-col"><div class="fl-title">Tin tức</div><a href="#">Tin tức</a><a href="#">Khuyến mãi</a><a href="blog.html">Blog trà</a></div>
+    <div class="fl-col"><div class="fl-title">Theo dõi</div><a href="#">📘 Facebook</a><a href="#">📸 Instagram</a><a href="#">🎵 TikTok</a></div>
+  </div>
+  <div class="footer-bottom">© 2024 Trà Sen. Bảo lưu mọi quyền.</div>
+</footer>
+
+<div class="social-float">
+  <a href="https://www.facebook.com/profile.php?id=100075729593336" target="_blank" class="sf-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+  <a href="https://www.instagram.com/trasenbienhoa/" target="_blank" class="sf-ig"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+  <a href="https://www.tiktok.com/@tiemtratraicaytuoitrasen" target="_blank" class="sf-tt"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg></a>
+</div>
+</body>
+</html>
